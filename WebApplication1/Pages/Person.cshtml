@@ -1,0 +1,31 @@
+﻿@page "{handler?}"
+
+@model PersonModel
+@using WebApplication1.Models
+@{
+    ViewData["Title"] = "Список пользователей";
+}
+
+@*<h2>Информация о пользователе</h2>
+<p>Name = @Model.Person?.Name</p>
+<p>Age = @Model.Person?.Age</p>*@
+
+<h2>Список пользователей</h2>
+<form method="POST">
+    Name <input type="text" name="name" /><br />
+    Age <input type="number" name="age" /><br /><br />
+    <input type="submit" asp-page-handler="ByName" value="По имени" />
+    <input type="submit" asp-page-handler="ByAge" value="По возрасту" />
+    <input type="submit" asp-page-handler="GreaterThan" value="Старше" />
+    <input type="submit" asp-page-handler="LessThan" value="Младше" />
+</form>
+<table class="table">
+    <tr><td>Name</td><td>Age</td></tr>
+    @foreach (Person person in Model.DisplayedPeople)
+    {
+        <tr>
+            <td>@person.Name</td>
+            <td>@person.Age</td>
+        </tr>
+    }
+</table>
